@@ -76,7 +76,7 @@ function registarArtista(req, res) {
     var params = req.body;
     artista.nombre = params.nombre;
     artista.descripcion = params.descripcion;
-    artista.imagen = "";
+    artista.imagen = "null";
 
     artista.save((error, registroAlmacenado) => {
         if (error) {
@@ -107,7 +107,7 @@ function actualizarArtista(req, res) {
 
 function borrarArtista(req, res) {
     var artistaId = req.params.id;
-    artModelo.findByIdAndRemove(artistaId, (error, artistaRemovido) => {
+    artModelo.findOneAndRemove(artistaId, (error, artistaRemovido) => {
         if (error) {
             res.status(500).send({ mensaje: 'Error en el servidor' });
         } else {
@@ -115,47 +115,11 @@ function borrarArtista(req, res) {
                 artista: artistaRemovido,
                 mensaje: 'Artista removido'
             });
+
         }
     });
 }
-
-//     artModelo.findByIdAndRemove(artistaId, (err, artistaRemovido) => {
-//         if (err) {
-//             res.status(500).send({ message: 'Error al eliminar un artista' });
-//         } else {
-//             if (!artistaRemovido) {
-//                 res.status(404).send({ message: 'El artista no ha sido removido' });
-//             } else {
-//                 res.status(200).send({ artistaRemovido });
-//                 //album
-
-//                 Album.find({ artista: artistaRemovido._id }).remove((err, albumRemovido) => {
-//                     if (err) {
-//                         res.status(500).send({ message: 'Error al borrar el album' });
-//                     } else {
-//                         if (!albumRemovido) {
-//                             res.status(404).send({ message: 'El album no se ha removido' });
-//                         } else {
-//                             //Canciones
-//                             Cancion.find({ album: albumRemovido._id }).remove((err, cancionesRemovido) => {
-//                                 if (err) {
-//                                     res.status(500).send({ message: 'Error al borrar el canciones' });
-//                                 } else {
-//                                     if (!cancionesRemovido) {
-//                                         res.status(404).send({ message: 'las Canciones no se ha removido' });
-//                                     } else {
-//                                         res.status(200).send({ artista: artistaRemovido });
-//                                     }
-//                                 }
-//                             });
-//                         }
-//                     }
-//                 });
-//             }
-//         }
-//     });
-// }
-
+//version estable 4.7.4
 module.exports = {
     getArtista,
     getArtistas,

@@ -2,7 +2,7 @@
 
 var jwt = require('jwt-simple');
 var momento = require('moment');
-var claveSecretaInterna = 'clave_secreta_interna';
+var claveSecretaInterna = 'x1v2erT@@@s';
 
 exports.createToken = function(user) {
     var payload = {

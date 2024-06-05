@@ -7,7 +7,7 @@ var api = express.Router();
 var multipart = require('connect-multiparty');
 var dir_fotos = multipart({ uploadDir: './cargas/' });
 
-api.get('/getAlbum/', md_auth.validarAcceso, albumControl.getAlbum);
-
+api.get('/getAlbum/:id', md_auth.validarAcceso, albumControl.getAlbum);
+api.post('/registroAlbum/', md_auth.validarAcceso, albumControl.saveAlbum);
 
 module.exports = api;
